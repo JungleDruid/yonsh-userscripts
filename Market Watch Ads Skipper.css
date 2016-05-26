@@ -1,0 +1,11 @@
+@namespace url(http://www.w3.org/1999/xhtml);
+
+@-moz-document domain("marketwatch.com") {
+    #avatar {
+        display : none !important;
+    }
+    
+    #blanket {
+        display : block !important;
+    }
+}
