@@ -3,7 +3,7 @@
 // @namespace   https://github.com/Yonsh/yonsh-userscripts
 // @include     https://m.facebook.com/shares/view?id=*
 // @include     https://www.facebook.com/*
-// @version     1.1.1
+// @version     1.1.2
 // @grant       none
 // @require     http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js
 // @require     https://gist.githubusercontent.com/BrockA/2625891/raw/9c97aa67ff9c5d56be34a55ad6c18a314e5eb548/waitForKeyElements.js
@@ -31,7 +31,7 @@ function addExtractLink() {
     if ($($shareLinks[i]).siblings().length == 0) {
       var link = $($shareLinks[i]).attr('href').replace("www", "m") + '&extract=true';
       $extractLink = $('<a href="' + link + '">(截取)</a>');
-      $extractLink.click(function() {window.location = link; return false;});
+      $extractLink.click(function() {window.location = $(this).attr('href'); return false;});
       $($shareLinks[i]).after($extractLink);
     }
   }
