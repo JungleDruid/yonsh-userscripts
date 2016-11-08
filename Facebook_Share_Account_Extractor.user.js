@@ -3,21 +3,22 @@
 // @namespace   https://github.com/Yonsh/yonsh-userscripts
 // @include     https://m.facebook.com/shares/view?id=*
 // @include     https://www.facebook.com/*
-// @version     1.1.0
+// @version     1.1.1
 // @grant       none
-// @require http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js
+// @require     http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js
+// @require     https://gist.githubusercontent.com/BrockA/2625891/raw/9c97aa67ff9c5d56be34a55ad6c18a314e5eb548/waitForKeyElements.js
 // ==/UserScript==
 
-$(window).load(function() {
+function start() {
   var url = window.location.href;
   if (url.indexOf("https://www.facebook.com") == 0) {
-    addExtractLink();
+    waitForKeyElements('.UFIShareLink', addExtractLink);
   } else {
     if ($.urlParam('extract')) {
-      extractAccounts();
+      $(window).load(extractAccounts);
     }
   }
-});
+}
 
 $.urlParam = function(name){
 	var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
@@ -27,10 +28,12 @@ $.urlParam = function(name){
 function addExtractLink() {
   $shareLinks = $('.UFIShareLink');
   for (var i = 0; i < $shareLinks.length; i++) {
-    var link = $($shareLinks[i]).attr('href').replace("www", "m") + '&extract=true';
-    $extractLink = $('<a href="' + link + '">(截取)</a>');
-    $extractLink.click(function() {window.location = link; return false;});
-    $($shareLinks[i]).after($extractLink);
+    if ($($shareLinks[i]).siblings().length == 0) {
+      var link = $($shareLinks[i]).attr('href').replace("www", "m") + '&extract=true';
+      $extractLink = $('<a href="' + link + '">(截取)</a>');
+      $extractLink.click(function() {window.location = link; return false;});
+      $($shareLinks[i]).after($extractLink);
+    }
   }
 }
 
@@ -51,3 +54,5 @@ function extractAccounts() {
   }
   $('body').html($table);
 }
+
+start();
