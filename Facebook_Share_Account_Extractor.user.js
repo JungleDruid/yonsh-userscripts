@@ -3,7 +3,7 @@
 // @namespace   https://github.com/Yonsh/yonsh-userscripts
 // @include     https://m.facebook.com/browse/shares?id=*
 // @include     https://www.facebook.com/*
-// @version     1.1.3
+// @version     1.1.4
 // @grant       none
 // @require     http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js
 // @require     https://gist.githubusercontent.com/BrockA/2625891/raw/9c97aa67ff9c5d56be34a55ad6c18a314e5eb548/waitForKeyElements.js
@@ -27,7 +27,7 @@ function start() {
                 $row.append('<td>' + $div.find('span').first().html() + '</td>');
                 var s = $div.find('a').attr('href');
                 s = 'https://facebook.com' + s.substring(0, s.indexOf('fref=') - 1);
-                $row.append('<td><a href="' + s + '">' + s + '</a></td>');
+                $row.append('<td><a href="' + s + '" target="_blank">' + s + '</a></td>');
                 if (!flags[s]) {
                     flags[s] = true;
                     $table.append($row);
