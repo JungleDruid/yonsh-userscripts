@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name         Facebook Mobile to Desktop
 // @namespace    https://github.com/Yonsh/yonsh-userscripts
-// @version      0.1
-// @description  try to take over the world!
-// @author       You
+// @version      0.11
+// @description  add a desktop link on the top of the mobile facebook page
+// @author       Yonsh Lin
 // @match        https://m.facebook.com/*
 // @grant        none
 // ==/UserScript==
